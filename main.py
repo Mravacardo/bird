@@ -1,7 +1,7 @@
 import pygame
 pygame.init()
 
-screen=pygame.display.set_caption(["Bird"])
+screen=pygame.display.set_caption("Bird")
 
 screen_width=700
 screen_height=500
@@ -12,7 +12,8 @@ screen = pygame.display.set_mode([screen_width,screen_height])
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
-        self.image = pygame.image.load("character.png").convert_alpha()
+        super().__init__()
+        self.image = pygame.image.load("bird.jpg").convert_alpha()
         self.image = pygame.transform.scale(self.image, (70,100))
         self.rect = self.image.get_rect()
 
@@ -28,11 +29,11 @@ class Player(pygame.sprite.Sprite):
 
 
 
-        if self.rect.left > 0:
+        if self.rect.left < 0:
             self.rect.left = 0
-        elif self.rect.right < screen_width:
+        elif self.rect.right > screen_width:
             self.rect.right = screen_width
-        if self.rect.top >= 0:
+        if self.rect.top <= 0:
             self.rect.top = 0
         elif self.rect.bottom >= screen_height:
             self.rect.bottom = screen_height
@@ -57,3 +58,5 @@ def startgame():
 
         pygame.display.update()
 startgame()
+
+
